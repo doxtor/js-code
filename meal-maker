@@ -1,0 +1,72 @@
+const menu = {
+    _courses: {
+      appetizers: [],
+      mains: [],
+      desserts: []
+    },
+    get appetizers() {
+      return this._courses.appetizers;
+    },
+    set appetizers(newAppetizers) {
+      this._courses.appetizers = newAppetizers;
+    },
+    get mains() {
+      return this._courses.mains;
+    },
+    set mains(newMains) {
+      this._courses.mains = newMains;
+    },
+    get desserts() {
+      return this._courses.desserts;
+    },
+    set desserts(newDesserts){
+      this._courses.desserts = newDesserst;
+    },
+    get courses() {
+      return {
+        appetizers: this.appetizers,
+        mains: this.mains,
+        desserts: this.desserts
+      }
+    },
+    addDishToCourse(courseName, dishName, dishPrice) {
+        const dish= {
+          name: dishName,
+          price: dishPrice
+        };
+        this._courses[courseName].push(dish);
+    },
+    getRandomDishFromCourse(courseName) {
+      let dishes = this._courses[courseName];
+      let rnd = Math.floor(Math.random() * dishes.length);
+      return dishes[rnd];
+    },
+    generateRandomMeal() {
+      let appetizer = this.getRandomDishFromCourse('appetizers');
+      let main = this.getRandomDishFromCourse('mains');
+      let dessert = this.getRandomDishFromCourse('desserts');
+      let total = appetizer.price + main.price + dessert.price
+
+      return `This is your order. Appetizer: ${appetizer.name}, Main : ${main.name}, Dessert: ${dessert.name}. You must pay IDR ${total}`;
+    },
+
+  }
+
+menu.addDishToCourse('appetizers', 'roti', 10);
+menu.addDishToCourse('appetizers', 'soup', 12);
+menu.addDishToCourse('appetizers', 'tiro', 11);
+menu.addDishToCourse('appetizers', 'jamur', 10);
+
+menu.addDishToCourse('mains', 'kodok', 20);
+menu.addDishToCourse('mains', 'kepiting', 30);
+menu.addDishToCourse('mains', 'ayam', 15);
+menu.addDishToCourse('mains', 'sapi', 20);
+
+menu.addDishToCourse('desserts', 'ice cream', 5);
+menu.addDishToCourse('desserts', 'cake', 8);
+menu.addDishToCourse('desserts', 'donut', 5);
+menu.addDishToCourse('desserts', 'bolu', 7);
+
+
+let meal = menu.generateRandomMeal();
+console.log(meal)
